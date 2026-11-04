@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<title>要不要和解测试 · 伤害过你的人道歉了，你真的能放下吗？</title>
+<style>
+:root{
+  --bg:#1a1a2e;
+  --bg-deep:#141427;
+  --card:#212138;
+  --card-2:#262640;
+  --gold:#d4a84b;
+  --gold-l:#e8c67a;
+  --gold-dim:rgba(212,168,75,.14);
+  --text:#ece7e0;
+  --text-2:#b5aec1;
+  --text-3:#8b8398;
+  --line:rgba(255,255,255,.075);
+  --violet:#8b7ab8;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  overflow-x:hidden;
+}
+body{
+  background:
+    radial-gradient(120% 60% at 50% -10%, #2c2b52 0%, rgba(44,43,82,0) 60%),
+    radial-gradient(90% 50% at 50% 108%, #241f3a 0%, rgba(36,31,58,0) 65%),
+    var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:26px 26px;
+  mask-image:radial-gradient(70% 60% at 50% 30%, #000 0%, transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 30%, #000 0%, transparent 100%);
+}
+.app{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 22px 56px}
+
+.screen{display:none}
+.screen.on{display:block;animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ HOME ============ */
+.home{padding-top:72px;text-align:center}
+.eyebrow{
+  font-size:11px;letter-spacing:.34em;color:var(--gold);
+  text-transform:uppercase;font-weight:600;margin-bottom:26px;
+  opacity:.85;
+}
+.home h1{
+  font-family:"Songti SC","STSong","SimSun",serif;
+  font-size:38px;line-height:1.4;font-weight:700;letter-spacing:.06em;
+  margin-bottom:20px;
+}
+.home h1 .gold{
+  color:var(--gold);
+  text-shadow:0 0 34px rgba(212,168,75,.28);
+}
+.home .sub{
+  font-size:15.5px;color:var(--text-2);line-height:1.85;
+  max-width:320px;margin:0 auto 34px;
+}
+.ornament{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:0 auto 34px;width:180px;opacity:.5;
+}
+.ornament i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.ornament i:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
+.ornament b{width:5px;height:5px;border-radius:50%;background:var(--gold);transform:rotate(45deg)}
+
+.lead-quote{
+  font-size:15px;color:#cdc6d8;line-height:2;margin-bottom:44px;
+  padding:0 6px;
+}
+.lead-quote span{color:var(--gold);opacity:.9}
+
+.btn{
+  display:block;width:100%;border:none;cursor:pointer;
+  font-family:inherit;font-size:16px;font-weight:700;letter-spacing:.12em;
+  padding:17px 20px;border-radius:100px;
+  transition:transform .18s ease, box-shadow .25s ease, opacity .2s;
+}
+.btn-gold{
+  background:linear-gradient(135deg,#e3bd6b,#c99a3c);
+  color:#1c1a12;
+  box-shadow:0 10px 30px -8px rgba(212,168,75,.55), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-gold:active{transform:scale(.975);box-shadow:0 6px 18px -8px rgba(212,168,75,.5)}
+.btn-ghost{
+  background:transparent;color:var(--text-2);
+  border:1px solid var(--line);font-weight:500;letter-spacing:.06em;
+}
+.btn-ghost:active{background:rgba(255,255,255,.04)}
+.btn:disabled{opacity:.32;cursor:default}
+
+.home .meta{
+  margin-top:20px;font-size:12.5px;color:var(--text-3);letter-spacing:.08em;
+}
+.resume-tip{
+  margin-top:22px;font-size:13px;color:var(--gold);opacity:.75;
+  letter-spacing:.04em;
+}
+.restart-link{
+  margin-top:16px;display:inline-block;font-size:12.5px;color:var(--text-3);
+  text-decoration:underline;text-underline-offset:4px;cursor:pointer;background:none;border:none;font-family:inherit;
+}
+
+/* ============ QUIZ ============ */
+.quiz{padding-top:34px}
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.qcount{font-size:12.5px;color:var(--gold);letter-spacing:.14em;font-variant-numeric:tabular-nums}
+.qcount b{font-size:16px;font-weight:700}
+.bar{flex:1;height:3px;background:rgba(255,255,255,.09);border-radius:3px;overflow:hidden}
+.bar i{
+  display:block;height:100%;width:0;border-radius:3px;
+  background:linear-gradient(90deg,#c99a3c,#e8c67a);
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+.dimtag{font-size:11.5px;color:var(--text-3);letter-spacing:.1em}
+
+.qbody{margin-top:34px;animation:qin .38s cubic-bezier(.2,.7,.3,1) both}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qtext{
+  font-family:"Songti SC","STSong","SimSun",serif;
+  font-size:21px;line-height:1.72;font-weight:600;letter-spacing:.02em;
+  margin-bottom:30px;color:#f2eee7;
+}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{
+  display:flex;align-items:flex-start;gap:13px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:16px 17px;
+  cursor:pointer;text-align:left;width:100%;
+  font-family:inherit;font-size:15px;line-height:1.7;color:#ddd7e2;
+  transition:border-color .22s, background .22s, transform .16s, box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.opt:active{transform:scale(.985)}
+.opt .k{
+  flex:none;width:23px;height:23px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:700;color:var(--text-3);
+  margin-top:2px;transition:all .22s;
+}
+.opt .t{flex:1}
+.opt.sel{
+  border-color:rgba(212,168,75,.6);
+  background:linear-gradient(135deg, rgba(212,168,75,.13), rgba(212,168,75,.05));
+  box-shadow:0 0 0 1px rgba(212,168,75,.16), 0 8px 26px -14px rgba(212,168,75,.7);
+}
+.opt.sel .k{background:var(--gold);border-color:var(--gold);color:#1c1a12}
+.opt.sel .t{color:#f5efe4}
+.opt.sel::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold),transparent);
+}
+
+.nav{display:flex;gap:10px;margin-top:34px}
+.nav .btn{font-size:15px;padding:15px 10px;letter-spacing:.08em}
+.nav .btn-ghost{flex:0 0 108px}
+.nav .btn-gold,.nav .btn-next{flex:1}
+.skip{
+  display:block;margin:20px auto 0;background:none;border:none;cursor:pointer;
+  font-family:inherit;font-size:13px;color:var(--text-3);letter-spacing:.08em;
+  text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.14);
+}
+.skip:hover{color:var(--text-2)}
+
+/* ============ LOADING ============ */
+.loading{
+  padding-top:200px;text-align:center;
+}
+.loading p{font-size:14.5px;color:var(--text-2);letter-spacing:.1em}
+.dots{margin-top:22px;display:flex;gap:9px;justify-content:center}
+.dots i{
+  width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.25;
+  animation:blink 1.2s infinite;
+}
+.dots i:nth-child(2){animation-delay:.18s}
+.dots i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+@keyframes pop{from{transform:scale(.35);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ============ RESULT ============ */
+.result{padding-top:38px}
+.res-head{text-align:center;margin-bottom:30px}
+.res-eyebrow{
+  font-size:11px;letter-spacing:.3em;color:var(--gold);opacity:.8;
+  margin-bottom:18px;font-weight:600;
+}
+.res-name{
+  font-family:"Songti SC","STSong","SimSun",serif;
+  font-size:34px;font-weight:700;letter-spacing:.05em;line-height:1.4;
+  color:var(--gold);
+  text-shadow:0 0 40px rgba(212,168,75,.25);
+  margin-bottom:16px;
+}
+.res-hook{
+  font-size:15px;line-height:1.95;color:#d3ccdd;
+  padding:0 4px;
+}
+.res-hook::before{content:"「";color:var(--gold);opacity:.55}
+.res-hook::after{content:"」";color:var(--gold);opacity:.55}
+
+.tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:22px 0 34px}
+.tags span{
+  font-size:12.5px;letter-spacing:.08em;color:var(--gold);
+  border:1px solid rgba(212,168,75,.32);border-radius:100px;
+  padding:5px 14px;background:rgba(212,168,75,.06);
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  border:1px solid var(--line);border-radius:20px;
+  padding:24px 20px;margin-bottom:16px;
+}
+.card-title{
+  font-size:11.5px;letter-spacing:.2em;color:var(--gold);font-weight:600;
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;
+}
+.card-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(212,168,75,.28),transparent)}
+.card p{font-size:15px;line-height:2;color:#cfc8da}
+.card p strong{color:#f2ece2;font-weight:600}
+
+.radar-box{text-align:center}
+.radar-box svg{width:100%;max-width:310px;height:auto;margin:0 auto;display:block}
+.radar-note{
+  font-size:12px;color:var(--text-3);line-height:1.9;margin-top:14px;text-align:left;
+  border-top:1px dashed rgba(255,255,255,.07);padding-top:14px;
+}
+.radar-note b{color:var(--text-2);font-weight:600}
+
+.split{display:flex;flex-direction:column;gap:14px}
+.mini{border-left:2px solid var(--gold);padding-left:16px}
+.mini.violet{border-left-color:var(--violet)}
+.mini h4{
+  font-size:13px;letter-spacing:.14em;color:var(--gold);font-weight:600;margin-bottom:8px;
+}
+.mini.violet h4{color:#a596cf}
+.mini p{font-size:14.5px;line-height:1.9;color:#c9c2d4}
+
+.final-quote{
+  text-align:center;padding:34px 22px;
+  background:radial-gradient(120% 100% at 50% 0%, rgba(212,168,75,.1), transparent 70%);
+  border:1px solid rgba(212,168,75,.18);border-radius:20px;margin-bottom:16px;
+}
+.final-quote .sm{
+  font-size:11px;letter-spacing:.26em;color:var(--gold);opacity:.75;margin-bottom:16px;
+}
+.final-quote .big{
+  font-family:"Songti SC","STSong","SimSun",serif;
+  font-size:18px;line-height:1.95;color:#f0e9dd;letter-spacing:.03em;
+}
+
+.share-tip{
+  text-align:center;font-size:12.5px;color:var(--text-3);line-height:1.9;
+  margin:26px 0 22px;
+}
+.foot{
+  text-align:center;font-size:11.5px;color:#5f5870;line-height:1.9;margin-top:30px;
+}
+
+@media (max-width:380px){
+  .home h1{font-size:32px}
+  .qtext{font-size:19px}
+  .res-name{font-size:29px}
+  .opt{font-size:14.5px;padding:15px 15px}
+  .card{padding:22px 17px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ================= HOME ================= -->
+  <section class="screen on" id="s-home">
+    <div class="home">
+      <div class="eyebrow">A Test About Letting Go</div>
+      <h1>要不要<span class="gold">和解</span></h1>
+      <p class="sub">伤害过你的人道歉了，<br>你真的能放下吗？</p>
+      <div class="ornament"><i></i><b></b><i></i></div>
+      <p class="lead-quote">
+        有些人说「我不原谅」，<br>
+        有些人说「我早就不记得了」。<br>
+        <span>你是哪一种？</span>
+      </p>
+      <button class="btn btn-gold" id="btn-start">开始测试</button>
+      <p class="meta">15 道题 · 约 3 分钟 · 不记名</p>
+      <p class="resume-tip" id="resume-tip" style="display:none"></p>
+      <button class="restart-link" id="btn-clear" style="display:none">清除进度，重新开始</button>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section class="screen" id="s-quiz">
+    <div class="quiz">
+      <div class="topbar">
+        <div class="qcount">第 <b id="cur">1</b> / 15 题</div>
+        <div class="bar"><i id="barfill"></i></div>
+      </div>
+      <div class="dimtag" id="dimtag"></div>
+      <div id="qbody"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" id="btn-prev">上一题</button>
+        <button class="btn btn-gold" id="btn-next">下一题</button>
+      </div>
+      <button class="skip" id="btn-skip">跳过这题</button>
+    </div>
+  </section>
+
+  <!-- ================= LOADING ================= -->
+  <section class="screen" id="s-loading">
+    <div class="loading">
+      <p>正在整理你说过和没说过的那些话…</p>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section class="screen" id="s-result">
+    <div class="result" id="result-body"></div>
+  </section>
+
+</div>
+
+<script>
+/* =========================================================
+   数据层
+   ========================================================= */
+const DIM = {
+  M:{name:'记忆深度', max:12, desc:'伤害过去之后，它在你心里留下的清晰程度。'},
+  O:{name:'原谅动机', max:12, desc:'你选择原谅，是因为真的放下了，还是因为怕失去。'},
+  R:{name:'修复意愿', max:12, desc:'面对示好，你愿不愿意接住，甚至先迈一步。'},
+  B:{name:'底线强度', max:9,  desc:'你对"再也不能接受"这件事的清晰度。'}
+};
+
+// w: 类型权重  N=旧账博物馆 P=试用期考官 S=静音降级 R=一键翻篇
+// v: 该题所属维度的强度值（0-3）
+const QS = [
+  // ---------- ① 伤害记忆深度 ----------
+  {dim:'M', q:'半年前那场让你很难受的争执，今天突然有人提起了。你的第一反应是——', o:[
+    {t:'细节我记得比谁都清楚，连他当时用的那个词我都还记得', w:{N:3,S:1}, v:3},
+    {t:'心里咯噔一下，脸上还是笑着说了句"都过去了"', w:{S:3,N:1}, v:2},
+    {t:'有点模糊了，只记得那阵子确实挺难受的', w:{R:3,P:1}, v:1},
+    {t:'会想起来，但更多是在想"当时我们怎么就弄成那样了"', w:{P:3,R:1}, v:2}
+  ]},
+  {dim:'M', q:'深夜刷到一条和那段经历很像的帖子，你会——', o:[
+    {t:'一条条看完，然后在心里把那天又重演了一遍', w:{N:3,S:1}, v:3},
+    {t:'快速划过去，但那一晚睡得不太好', w:{S:3,N:1}, v:2},
+    {t:'看完有点感慨，然后关掉手机睡觉', w:{R:3}, v:1},
+    {t:'截图发给别人，当个故事讲出来', w:{P:3,R:1}, v:2}
+  ]},
+  {dim:'M', q:'共同朋友的聚会上，他也在。你走进包厢看到他的那一刻——', o:[
+    {t:'照常打招呼，但整晚都不会主动跟他说一句话', w:{S:3,N:1}, v:2},
+    {t:'会刻意坐得离他远一点，那顿饭吃得心不在焉', w:{N:3,P:1}, v:3},
+    {t:'主动过去碰个杯，聊两句，不尴尬就行', w:{R:3}, v:1},
+    {t:'看他今天什么态度，他自然我就自然', w:{P:3,S:1}, v:2}
+  ]},
+  {dim:'M', q:'事情过去一年了，你还会在某个瞬间突然想起当时的画面吗？', o:[
+    {t:'会，而且每次想起来，当时的情绪都还在', w:{N:3}, v:3},
+    {t:'会，但已经没什么情绪了，像在看别人的事', w:{R:3}, v:1},
+    {t:'偶尔会，通常是在我又遇到类似的事的时候', w:{P:3}, v:2},
+    {t:'会，但我会立刻把那点情绪压下去，不想让人看出来', w:{S:3,N:1}, v:2}
+  ]},
+
+  // ---------- ② 原谅动机 ----------
+  {dim:'O', q:'他道歉了，说"当时确实是我不好"。你回了一句"没事"，这句"没事"的意思是——', o:[
+    {t:'事是真的过去了，我没打算再提', w:{R:3}, v:1},
+    {t:'只是不想让场面难看，先这么说着', w:{S:3}, v:2},
+    {t:'我接受这句道歉，但不会再给他一次机会', w:{N:3,S:1}, v:0},
+    {t:'我等这句道歉很久了，等到了，人一下就松了', w:{P:3,R:1}, v:3}
+  ]},
+  {dim:'O', q:'如果这段关系就此结束、再也不联系，你心里最真实的感觉是——', o:[
+    {t:'挺好的，清净', w:{N:3}, v:0},
+    {t:'会难过很久，我受不了"再也没有"这件事', w:{P:3}, v:3},
+    {t:'有点可惜，但也不至于活不下去', w:{S:3}, v:2},
+    {t:'会遗憾，但我知道人本来就是会走散的', w:{R:3}, v:1}
+  ]},
+  {dim:'O', q:'你愿意原谅他，最主要是因为——', o:[
+    {t:'我真的理解了他当时为什么会那样做', w:{R:3}, v:1},
+    {t:'我不想失去这个人，这比什么都重要', w:{P:3}, v:3},
+    {t:'一直僵着太累了，我想让这件事赶紧结束', w:{S:3,N:1}, v:2},
+    {t:'我没有原谅，我只是暂时不提了', w:{N:3,S:1}, v:0}
+  ]},
+  {dim:'O', q:'假设他永远不会道歉，你的状态会是——', o:[
+    {t:'那就这样吧，我不需要那句对不起也能往前走', w:{R:3}, v:1},
+    {t:'我会一直卡在那儿，没有那句道歉我过不去', w:{N:3,P:1}, v:2},
+    {t:'我会自己找一个说法，让自己能接受', w:{S:3}, v:2},
+    {t:'会很难受，但最后可能还是我先低头', w:{P:3}, v:3}
+  ]},
+
+  // ---------- ③ 关系修复意愿 ----------
+  {dim:'R', q:'他发来一条消息："最近还好吗？"你会——', o:[
+    {t:'回，但只回礼貌范围内的内容', w:{S:3}, v:1},
+    {t:'不回。看到了，就是不想回', w:{N:3}, v:0},
+    {t:'会聊起来，甚至会主动说"改天吃个饭"', w:{R:3,P:1}, v:3},
+    {t:'先看他最近是不是有什么变化，再决定要不要热络', w:{P:3}, v:2}
+  ]},
+  {dim:'R', q:'这一次，你会主动迈出第一步吗？', o:[
+    {t:'不会。要和解也该他先来', w:{N:3}, v:0},
+    {t:'会，如果我还想留住这段关系', w:{P:3}, v:3},
+    {t:'会，但只是想把这一页翻过去，不代表要恢复如初', w:{S:3}, v:1},
+    {t:'会啊，谁先开口有什么要紧', w:{R:3}, v:3}
+  ]},
+  {dim:'R', q:'他约你见面，说"想跟你好好聊聊"。你的第一反应是——', o:[
+    {t:'有点抗拒，怕又变成一次消耗', w:{N:3}, v:1},
+    {t:'会去，我想知道他到底是怎么想的', w:{P:3}, v:3},
+    {t:'会去，但我会提前想好哪些话不说', w:{S:3}, v:2},
+    {t:'去就去，聊完该干嘛干嘛', w:{R:3}, v:2}
+  ]},
+  {dim:'R', q:'如果这段关系真的修复了，你希望它变成什么样？', o:[
+    {t:'恢复成以前那样，我怀念那个时候', w:{P:3}, v:3},
+    {t:'客气一点反而好，我不需要那么近了', w:{S:3}, v:1},
+    {t:'变成什么样都行，我不太在意了', w:{R:3}, v:1},
+    {t:'修复不了。有些裂缝补上了也有痕', w:{N:3}, v:0}
+  ]},
+
+  // ---------- ④ 底线设定 ----------
+  {dim:'B', q:'如果只能选一条，你的红线是——', o:[
+    {t:'背叛。把我的秘密和软肋当成谈资', w:{N:3}, v:3},
+    {t:'冷暴力。用沉默惩罚我，让我一直猜', w:{P:3}, v:2},
+    {t:'当众让我难堪。那口气我咽不下去', w:{S:3}, v:3},
+    {t:'说实话没有绝对的红线，要看是谁', w:{R:3}, v:0}
+  ]},
+  {dim:'B', q:'对方越过了你的底线，但他红着眼说"我真的知道错了"。你会——', o:[
+    {t:'会心软，但这一次我会记着', w:{P:3,S:1}, v:2},
+    {t:'更冷了。眼泪不能当豁免权', w:{N:3}, v:3},
+    {t:'嘴上说原谅，从此不再让他靠近', w:{S:3}, v:3},
+    {t:'会给第二次机会，人都会犯错', w:{R:3}, v:1}
+  ]},
+  {dim:'B', q:'你心里有没有一条"说出去就回不了头"的线？', o:[
+    {t:'有，很清楚是哪几条，我已经为它划掉过人', w:{N:3}, v:3},
+    {t:'有，但真遇到的时候我常常又退让了', w:{P:3}, v:1},
+    {t:'有，但我不会说出来，只在心里默默执行', w:{S:3}, v:2},
+    {t:'好像没有，我更能接受"人都会变"', w:{R:3}, v:0}
+  ]}
+];
+
+const TYPES = {
+  N:{
+    name:'旧账博物馆馆长',
+    hook:'你不是记仇，你是记性太好。',
+    tags:['记性太好','原则在线','不回头'],
+    feature:'你可以和他吃饭、说笑、在朋友圈点个赞，但心里那扇门已经从内侧锁上了。那句伤人的话、那个转身的背影、那一次被晾在原地的下午，你都收得好好的，编号归档。你不吵不闹，也不给第二次机会——因为在你这里，伤害不是事故，是证据。你不是不肯放下，你是不肯假装那件事没发生过。',
+    power:'极强的边界感和自我保护能力。同一个人很少能伤到你两次，因为第一次你就已经结完账了。你活得很清醒，也很少委屈自己。',
+    wound:'你的档案柜里住着太多人，占的却是你的空间。有时候对方早就忘了，只有你还在深夜调取卷宗。你惩罚的从来不是他，是那个还在原地站着的自己。',
+    match:'"说清楚就做到"的直球型关系。他不需要你猜，不会让你反复确认，也不会把道歉当成一次性的通行证。',
+    advice:'你可以不原谅，但别让那份档案一直开着灯。归档，然后关灯。'
+  },
+  P:{
+    name:'关系试用期考官',
+    hook:'你说"不可能了"，但你已经偷偷给他留了一扇窗。',
+    tags:['嘴硬心软','看行动','容易心软'],
+    feature:'你嘴上说着"不可能了"，手却没把门关死。你会看——看他这次能坚持多久，看他是不是真的变了，看他的道歉里有没有具体的细节。你不是好哄，你只是愿意给证据一个机会。只要对方的示好足够持续、足够具体，你心里那块冰就会一点点化开，然后你在某个瞬间突然说："算了，吃饭吧。"',
+    power:'你能精准分辨"表演式道歉"和"真的懂了"。你的松动从来不是被说服的，是被验证出来的。你给出去的第二次机会，往往是真的值得。',
+    wound:'你的试用期没有截止日期。有些人只是很擅长重复道歉，而你很擅长重复给机会。你把"他这次不一样"说给自己听了很多遍。',
+    match:'行动大于语言的人。他不用每天说在乎你，但会在你提过一次的事情上，再也不犯第二次。',
+    advice:'试用期可以有，但请写清楚考核标准和结束日期。'
+  },
+  S:{
+    name:'静音降级大师',
+    hook:'你说"没事"的时候，心里已经演完了一整部连续剧。',
+    tags:['体面收场','情绪稳定','悄悄降级'],
+    feature:'你不会吵，不会翻脸，甚至还会主动发消息、点赞、赴约——但从那天起，你悄悄把他从"可以麻烦的人"降成了"客气一下的人"。你的和解是一种体面的收场，不是重新开始。别人以为你们和好如初，只有你知道，那段关系已经搬走了，只是房子还留着。',
+    power:'极高的情绪管理能力和社交分寸感。你几乎从不让场面难看，也几乎不给自己树敌。你看起来永远是那个"很好相处"的人。',
+    wound:'你把所有没说的话都存进了身体里。降级一次不要紧，降级太多次，你会发现自己身边全是"熟人"，却没有一个"可以麻烦的人"。',
+    match:'会追问的人。他不会满足于你那句"没事"，会多问一句："真的吗？"然后等你把话说完。',
+    advice:'你要的其实不是体面，是被看见。下次试着把那句"我还在意"说出口。'
+  },
+  R:{
+    name:'一键翻篇选手',
+    hook:'你不是原谅得快，你是真的不想再背着它走路。',
+    tags:['情绪复原力','不内耗','懒得翻旧账'],
+    feature:'事情过去了就是过去了，你甚至懒得翻旧账——不是大度，是觉得没意思。你可以和伤害过你的人正常相处，不是因为你忍了，是因为那件事在你心里已经不占地方了。你是那种吵完架第二天就能问对方"中午吃什么"的人，别人还在生气，你已经翻页了。',
+    power:'情绪复原力极强。你不消耗自己，也不消耗关系，和你相处的人会觉得很轻松——因为你从不要求别人反复为同一件事赎罪。',
+    wound:'你的翻篇太快，快到别人还没意识到伤了你，你就已经笑着说没事了。久了，你的委屈会没人知道——包括你自己。',
+    match:'会认真道歉、也允许你生气的人。他不需要你大度，他甚至希望你偶尔不讲道理一次。',
+    advice:'翻篇是能力，但"我也会疼"要说出来。别让释怀变成一种习惯性的自我省略。'
+  }
+};
+
+/* =========================================================
+   状态 & 存储
+   ========================================================= */
+const KEY = 'hj_test_v1';
+const N = QS.length;
+let state = { i:0, ans:new Array(N).fill(null) };
+
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    if(!d || !Array.isArray(d.ans) || d.ans.length !== N) return false;
+    state.i = Math.min(Math.max(0, d.i|0), N-1);
+    state.ans = d.ans.map(v => (typeof v === 'number' ? v : null));
+    return state.ans.some(v => v !== null);
+  }catch(e){ return false; }
+}
+function clearSave(){
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  state = { i:0, ans:new Array(N).fill(null) };
+}
+
+/* =========================================================
+   视图切换
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const screens = { home:$('#s-home'), quiz:$('#s-quiz'), loading:$('#s-loading'), result:$('#s-result') };
+function go(name){
+  Object.keys(screens).forEach(k => screens[k].classList.toggle('on', k === name));
+  window.scrollTo({top:0, behavior:'instant' in window ? 'auto' : 'auto'});
+}
+
+/* =========================================================
+   渲染题目
+   ========================================================= */
+function renderQ(){
+  const idx = state.i;
+  $('#cur').textContent = idx + 1;
+  $('#barfill').style.width = ((idx + 1) / N * 100) + '%';
+  const dimName = {M:'① 伤害记忆', O:'② 原谅动机', R:'③ 修复意愿', B:'④ 底线设定'}[QS[idx].dim];
+  $('#dimtag').textContent = dimName;
+
+  const q = QS[idx];
+  let h = '<div class="qbody"><div class="qtext">' + q.q + '</div><div class="opts">';
+  q.o.forEach((o, k) => {
+    const sel = state.ans[idx] === k ? ' sel' : '';
+    h += '<button class="opt' + sel + '" data-k="' + k + '">'
+       + '<span class="k">' + 'ABCD'[k] + '</span>'
+       + '<span class="t">' + o.t + '</span></button>';
+  });
+  h += '</div></div>';
+  $('#qbody').innerHTML = h;
+
+  $('#btn-prev').disabled = idx === 0;
+  $('#btn-next').textContent = idx === N - 1 ? '查看我的结果' : '下一题';
+  $('#btn-skip').textContent = idx === N - 1 ? '跳过，直接看结果' : '跳过这题';
+
+  $('#qbody').querySelectorAll('.opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.ans[idx] = +btn.dataset.k;
+      save();
+      $('#qbody').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+      btn.classList.add('sel');
+      setTimeout(next, 210);
+    });
+  });
+}
+
+function next(){
+  if(state.i < N - 1){
+    state.i++;
+    save();
+    renderQ();
+  }else{
+    finish();
+  }
+}
+
+/* =========================================================
+   计分
+   ========================================================= */
+function calc(){
+  const dim = {M:0, O:0, R:0, B:0};
+  const dmax = {M:0, O:0, R:0, B:0};
+  const tw  = {N:0, P:0, S:0, R:0};
+  let answered = 0;
+
+  state.ans.forEach((k, i) => {
+    if(k === null) return;
+    answered++;
+    const q = QS[i], o = q.o[k];
+    dim[q.dim] += o.v;
+    dmax[q.dim] += 3;
+    Object.keys(o.w).forEach(t => { tw[t] += o.w[t]; });
+  });
+
+  // 跳过题不计入分母：百分比 = 实得分 / 已作答题目的满分
+  const pct = {};
+  Object.keys(DIM).forEach(d => {
+    pct[d] = dmax[d] > 0 ? Math.round(dim[d] / dmax[d] * 100) : 0;
+  });
+
+  let type;
+  if(answered === 0){
+    type = 'S';
+  }else{
+    const order = ['N','P','S','R'];
+    type = order.reduce((a, b) => (tw[b] > tw[a] ? b : a), order[0]);
+    // 并列时，用维度画像做二次判定
+    const tied = order.filter(t => tw[t] === tw[type]);
+    if(tied.length > 1){
+      const score = {
+        N: pct.M * 0.45 + pct.B * 0.35 + (100 - pct.O) * 0.20,
+        P: pct.O * 0.50 + pct.R * 0.25 + pct.M * 0.25,
+        S: pct.M * 0.35 + (100 - pct.R) * 0.35 + pct.O * 0.30,
+        R: (100 - pct.M) * 0.45 + (100 - pct.B) * 0.30 + pct.R * 0.25
+      };
+      type = tied.reduce((a, b) => (score[b] > score[a] ? b : a), tied[0]);
+    }
+  }
+
+  return {dim, pct, tw, type, answered};
+}
+
+/* =========================================================
+   雷达图（SVG，无依赖）
+   ========================================================= */
+function radarSVG(pct){
+  const cx = 160, cy = 152, R = 88;
+  const axes = [
+    {k:'M', a:-Math.PI/2},
+    {k:'O', a:0},
+    {k:'R', a:Math.PI/2},
+    {k:'B', a:Math.PI}
+  ];
+  const pt = (a, r) => [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+  let s = '<svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">';
+  s += '<defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">'
+     + '<stop offset="0%" stop-color="#e8c67a" stop-opacity=".42"/>'
+     + '<stop offset="100%" stop-color="#c99a3c" stop-opacity=".16"/></linearGradient></defs>';
+
+  // 网格
+  [0.25, 0.5, 0.75, 1].forEach(level => {
+    const pts = axes.map(ax => pt(ax.a, R * level).map(n => n.toFixed(1)).join(',')).join(' ');
+    s += '<polygon points="' + pts + '" fill="none" stroke="rgba(255,255,255,' + (level === 1 ? '.14' : '.07') + ')" stroke-width="1"/>';
+  });
+  // 轴线
+  axes.forEach(ax => {
+    const p = pt(ax.a, R);
+    s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="rgba(255,255,255,.08)" stroke-width="1"/>';
+  });
+
+  // 数据多边形
+  let dpts = '';
+  let dots = '';
+  axes.forEach(ax => {
+    const v = Math.max(0.04, (pct[ax.k] || 0) / 100);
+    const p = pt(ax.a, R * v);
+    dpts += p[0].toFixed(1) + ',' + p[1].toFixed(1) + ' ';
+    dots += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.4" fill="#e8c67a" stroke="#1a1a2e" stroke-width="1.6"/>';
+  });
+  s += '<g style="transform-origin:' + cx + 'px ' + cy + 'px;animation:pop .8s cubic-bezier(.2,.8,.3,1) both">';
+  s += '<polygon points="' + dpts + '" fill="url(#rg)" stroke="#d4a84b" stroke-width="2" stroke-linejoin="round"/>';
+  s += dots + '</g>';
+
+  // 标签（顶部轴单独上移，避免与网格顶点重叠）
+  const labels = [
+    {k:'M', x:cx, y:cy - R - 30, anchor:'middle', dy:17},
+    {k:'O', x:cx + R + 12, y:cy + 4, anchor:'start', dy:15},
+    {k:'R', x:cx, y:cy + R + 26, anchor:'middle', dy:15},
+    {k:'B', x:cx - R - 12, y:cy + 4, anchor:'end', dy:15}
+  ];
+  labels.forEach(l => {
+    s += '<text x="' + l.x + '" y="' + l.y + '" text-anchor="' + l.anchor + '" '
+       + 'font-size="12" fill="#a9a2b8" letter-spacing=".5">' + DIM[l.k].name + '</text>';
+    s += '<text x="' + l.x + '" y="' + (l.y + l.dy) + '" text-anchor="' + l.anchor + '" '
+       + 'font-size="13" font-weight="700" fill="#d4a84b">' + (pct[l.k] || 0) + '%</text>';
+  });
+  s += '</svg>';
+  return s;
+}
+
+/* =========================================================
+   结果页
+   ========================================================= */
+function finish(){
+  go('loading');
+  setTimeout(() => {
+    const r = calc();
+
+    // 全部跳过的温柔出口
+    if(r.answered === 0){
+      $('#result-body').innerHTML =
+        '<div class="res-head" style="padding-top:40px">'
+        + '<div class="res-eyebrow">还 没 到 时 候</div>'
+        + '<div class="res-name" style="font-size:28px">你一道题都没答</div>'
+        + '<div class="res-hook">有些事，可能真的还没到能整理的时候。<br>没关系，不用勉强。</div>'
+        + '</div>'
+        + '<div class="card"><div class="card-title">写 给 你</div><p>'
+        + '这份测试里没有一道题是轻松的，因为每一道都在问你："那件事，你还疼吗？"'
+        + '如果现在连选一个答案都觉得费力，那就先别选。'
+        + '人的心不是随时都能打开抽屉的，有些抽屉要等很久才敢拉开。<br><br>'
+        + '等你哪天想起那个人的时候，胸口不再发紧了，再来做一次也不迟。'
+        + '</p></div>'
+        + '<div class="final-quote"><div class="sm">写 给 你 的 一 句 话</div>'
+        + '<div class="big">不回答，也是一种回答。<br>你现在需要的是时间，不是答案。</div></div>'
+        + '<button class="btn btn-gold" id="btn-restart">重新测试</button>'
+        + '<p class="foot">本测试为趣味心理测评，用于自我觉察，<br>不构成任何心理诊断或专业建议。</p>';
+      $('#btn-restart').addEventListener('click', resetAll);
+      go('result');
+      return;
+    }
+
+    const t = TYPES[r.type];
+    let h = '';
+
+    h += '<div class="res-head">';
+    h += '<div class="res-eyebrow">你 的 和 解 类 型</div>';
+    h += '<div class="res-name">' + t.name + '</div>';
+    h += '<div class="res-hook">' + t.hook + '</div>';
+    h += '</div>';
+
+    h += '<div class="tags">' + t.tags.map(x => '<span>' + x + '</span>').join('') + '</div>';
+
+    // 雷达图
+    h += '<div class="card radar-box">';
+    h += '<div class="card-title">你 的 四 维 画 像</div>';
+    h += radarSVG(r.pct);
+    h += '<div class="radar-note">';
+    h += '<b>记忆深度</b> 越高，说明那件事在你心里留下的痕迹越清晰；<br>';
+    h += '<b>原谅动机</b> 越高，说明你更容易"因为怕失去"而选择原谅；<br>';
+    h += '<b>修复意愿</b> 越高，说明你越愿意接住对方的示好；<br>';
+    h += '<b>底线强度</b> 越高，说明你越清楚自己"什么绝对不行"。';
+    h += '</div></div>';
+
+    // 核心特征
+    h += '<div class="card"><div class="card-title">核 心 特 征</div><p>' + t.feature + '</p></div>';
+
+    // 超能力 / 暗伤点
+    h += '<div class="card"><div class="card-title">关 系 里 的 你</div><div class="split">';
+    h += '<div class="mini"><h4>你的超能力</h4><p>' + t.power + '</p></div>';
+    h += '<div class="mini violet"><h4>你的暗伤点</h4><p>' + t.wound + '</p></div>';
+    h += '</div></div>';
+
+    // 最合拍
+    h += '<div class="card"><div class="card-title">最 合 拍 的 关 系</div><p>' + t.match + '</p></div>';
+
+    // 一句话建议
+    h += '<div class="final-quote"><div class="sm">写 给 你 的 一 句 话</div>'
+       + '<div class="big">' + t.advice + '</div></div>';
+
+    h += '<p class="share-tip">截图保存这张结果<br>转给那个你还没想好要不要和解的人</p>';
+
+    h += '<button class="btn btn-gold" id="btn-restart">重新测试</button>';
+
+    h += '<p class="foot">本测试为趣味心理测评，用于自我觉察，<br>不构成任何心理诊断或专业建议。</p>';
+
+    $('#result-body').innerHTML = h;
+    $('#btn-restart').addEventListener('click', resetAll);
+
+    go('result');
+    save();
+  }, 1500);
+}
+
+function resetAll(){
+  clearSave();
+  renderQ();
+  go('home');
+  $('#resume-tip').style.display = 'none';
+  $('#btn-clear').style.display = 'none';
+  $('#btn-start').textContent = '开始测试';
+}
+
+/* =========================================================
+   事件绑定
+   ========================================================= */
+$('#btn-start').addEventListener('click', () => {
+  renderQ();
+  go('quiz');
+});
+$('#btn-prev').addEventListener('click', () => {
+  if(state.i > 0){ state.i--; save(); renderQ(); }
+});
+$('#btn-next').addEventListener('click', next);
+$('#btn-skip').addEventListener('click', () => {
+  state.ans[state.i] = null;
+  save();
+  next();
+});
+$('#btn-clear').addEventListener('click', () => {
+  clearSave();
+  $('#resume-tip').style.display = 'none';
+  $('#btn-clear').style.display = 'none';
+  $('#btn-start').textContent = '开始测试';
+});
+
+/* 初始化 */
+(function init(){
+  if(load()){
+    const answered = state.ans.filter(v => v !== null).length;
+    $('#btn-start').textContent = answered === N ? '查看我的结果' : '继续上次测试';
+    $('#resume-tip').style.display = 'block';
+    $('#resume-tip').textContent = '已保存进度 · 已完成 ' + answered + ' / ' + N + ' 题';
+    $('#btn-clear').style.display = 'inline-block';
+  }
+  renderQ();
+})();
+</script>
+</body>
+</html>
